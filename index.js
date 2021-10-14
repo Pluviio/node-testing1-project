@@ -91,6 +91,8 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasons = ['summer', 'fall', 'winter', 'spring']
+    this.currentSeason = 0
   }
 
   /**
@@ -107,6 +109,13 @@ class Seasons {
    */
   next() {
     // ✨ implement
+    const result = this.seasons[this.currentSeason]
+    if(this.currentSeason === 3) {
+      this.currentSeason = 0
+    } else {
+      ++this.currentSeason
+    }
+    return result
   }
 }
 
@@ -121,6 +130,9 @@ class Car {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
     // ✨ initialize whatever other properties are needed
+
+    this.tankSize = tankSize
+    this.mpg = mpg
   }
 
   /**
@@ -138,6 +150,17 @@ class Car {
    */
   drive(distance) {
     // ✨ implement
+
+    const milesAllowed = this.tank * this.mpg
+    if (distance <= milesAllowed) {
+      this.odometer = this.odometer + distance
+      this.tank = this.tank = (distance / this.mpg)
+      return this.odometer
+    }
+
+    this.odometer = this.odometer + milesAllowed
+    this.tank = 0
+    return this.odometer
   }
 
   /**
@@ -153,6 +176,14 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+
+    const gallonsRoom = this.tankSize = this.tank
+    if( gallons <= gallonsRoom ) {
+      this.tank = this.tank + gallons
+    } else {
+      this.tank = this.tankSize
+    }
+    return this.tank * this.mpg
   }
 }
 
@@ -171,6 +202,10 @@ class Car {
  */
 function isEvenNumberAsync(number) {
   // ✨ implement
+  if ( number% 2 === 0 ) {
+    return Promise.resolve(true)
+  }
+  return Promise.resolve(false)
 }
 
 module.exports = {
